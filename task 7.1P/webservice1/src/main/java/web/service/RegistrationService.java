@@ -1,10 +1,6 @@
 package web.service;
 
-/**
- * Business logic to handle registration functions.
- * 
- * @author Ahsan.
- */
+
 public class RegistrationService {
 
 	public static boolean register(
