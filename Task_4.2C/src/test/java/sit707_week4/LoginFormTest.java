@@ -55,8 +55,6 @@ public class LoginFormTest {
         sleep(3);
     }
 
-    // ── Carry-over tests from 4.1P ────────────────────────────────
-
     @Test
     public void testStudentIdentity() {
         Assert.assertNotNull("Student ID is null", STUDENT_ID);
@@ -69,45 +67,30 @@ public class LoginFormTest {
         Assert.assertFalse("Student name is empty", STUDENT_NAME.trim().isEmpty());
     }
 
-    // ── Decision table tests ──────────────────────────────────────
-    //
-    // | Rule | Email         | Password      | Expected Result        |
-    // |------|---------------|---------------|------------------------|
-    // | R1   | No email      | Don't care    | Login fails (/login)   |
-    // | R2   | Wrong email   | Don't care    | Login fails (/login)   |
-    // | R3   | Correct email | Wrong pass    | Login fails (/login)   |
-    // | R4   | Correct email | No password   | Login fails (/login)   |
-    // | R5   | No email      | Wrong pass    | Login fails (/login)   |
-
-    // R1: no email + no password → stay on /login
     @Test
     public void testFailNoEmailNoPass() {
         performLogin("", "");
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
-    // R2: no email + wrong password → stay on /login
     @Test
     public void testFailNoEmailWrongPass() {
         performLogin("", "WrongPass123!");
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
-    // R3: wrong email + no password → stay on /login
     @Test
     public void testFailWrongEmailNoPass() {
         performLogin("fakeuser@example.com", "");
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
-    // R4: wrong email + wrong password → stay on /login
     @Test
     public void testFailWrongEmailWrongPass() {
         performLogin("fakeuser@example.com", "WrongPass123!");
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
     }
 
-    // R5: correct email format + wrong password → stay on /login
     @Test
     public void testFailCorrectEmailWrongPass() {
         performLogin("yashpinder@example.com", "WrongPass123!");
