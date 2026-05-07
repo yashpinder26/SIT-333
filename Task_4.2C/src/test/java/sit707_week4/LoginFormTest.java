@@ -16,6 +16,9 @@ public class LoginFormTest {
     private static final String STUDENT_ID   = "225159515";
     private static final String STUDENT_NAME = "Yashpinder Saini";
 
+    private static final String VALID_EMAIL = "yashpindersaini@gmail.com";
+    private static final String VALID_PASS  = "VJSBVSDdnvsl327y42()";
+
     WebDriver driver;
 
     @Before
@@ -93,7 +96,14 @@ public class LoginFormTest {
 
     @Test
     public void testFailCorrectEmailWrongPass() {
-        performLogin("yashpinder@example.com", "WrongPass123!");
+        performLogin(VALID_EMAIL, "WrongPass123!");
         Assert.assertTrue(driver.getCurrentUrl().contains("login"));
+    }
+
+    @Test
+    public void testPassCorrectEmailCorrectPass() {
+        performLogin(VALID_EMAIL, VALID_PASS);
+        sleep(4);
+        Assert.assertFalse(driver.getCurrentUrl().contains("login"));
     }
 }
